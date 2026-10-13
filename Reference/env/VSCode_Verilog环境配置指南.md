@@ -53,15 +53,35 @@ sudo apt install iverilog gtkwave yosys -y
 ```bash
 brew install icarus-verilog gtkwave yosys
 ```
-
 ### 1.4 验证工具链
 
-打开 VSCode 终端（`` Ctrl+` ``），依次执行，全部输出版本号即正常：
+打开 VSCode 终端（`` Ctrl+` ``）。
+
+**Windows 使用 OSS CAD Suite 时，建议先激活套件环境：**
 
 ```bash
-iverilog -v        # Icarus Verilog 编译器
+. D:\Tools\oss-cad-suite\environment.ps1
+```
+
+激活成功后，PowerShell 提示符前会出现：
+
+[OSS CAD Suite]
+
+若 PowerShell 提示 environment.ps1 未签名、禁止运行脚本，可仅对当前终端会话临时放行：
+
+```bash
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
+. D:\Tools\oss-cad-suite\environment.ps1
+```
+
+关闭该 PowerShell 窗口后，此临时设置自动失效，因此每次启动终端时都需要**重新激活**。
+
+然后依次执行以下命令，全部正常输出版本号即说明工具链可用：
+
+```bash
+iverilog -V        # Icarus Verilog 编译器
 vvp -V             # 仿真运行器
-yosys -V           # 综合工具（注意是大写 -V）
+yosys -V           # 逻辑综合工具
 gtkwave --version  # 波形查看器
 ```
 
